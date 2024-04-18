@@ -19,7 +19,7 @@ export default function Page() {
       if (password !== confirm) {
         alert("Passwords don't match");
       } else {
-        await fetch(`${DOMAIN}"/reset-password"` + `/${id}`, {
+        await fetch(`${DOMAIN}/reset-password/${id}`, {
           method: "POST",
           headers: {
             Accept: "application/json",

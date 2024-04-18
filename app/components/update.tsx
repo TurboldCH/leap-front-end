@@ -1,6 +1,7 @@
 "use client";
 import { Button, TextField } from "@mui/material";
 import { ReactNode, useEffect, useState } from "react";
+const DOMAIN = process.env.DOMAIN;
 
 export const Update = () => {
   const [productName, setProductName] = useState<string>();
@@ -25,7 +26,7 @@ export const Update = () => {
     category: string;
   }>();
   const findItem = async (event: React.SyntheticEvent) => {
-    await fetch("http://localhost:1000/products/" + category + "/" + itemID, {
+    await fetch(`${DOMAIN}/products/${category}/${itemID}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -61,7 +62,7 @@ export const Update = () => {
       .map((value) => {
         delete body[value];
       });
-    await fetch("http://localhost:1000/products/" + category + "/" + itemID, {
+    await fetch(`${DOMAIN}/products/${category}/${itemID}`, {
       method: "PUT",
       headers: {
         Accept: "application/json",

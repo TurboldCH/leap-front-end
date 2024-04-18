@@ -1,6 +1,7 @@
 "use client";
 import { Button, TextField } from "@mui/material";
 import { ReactNode, useEffect, useState } from "react";
+const DOMAIN = process.env.DOMAIN;
 
 export const Post = () => {
   const [productName, setProductName] = useState<string>();
@@ -50,7 +51,7 @@ export const Post = () => {
       .map((value: string) => {
         delete body[value];
       });
-    await fetch("http://localhost:1000/products/createItem", {
+    await fetch(`${DOMAIN}/products/createItem`, {
       method: "POST",
       headers: {
         Accept: "application/json",

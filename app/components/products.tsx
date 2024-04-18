@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+const DOMAIN = process.env.DOMAIN;
 
 export const Products = () => {
   const [products, setProducts] = useState<
@@ -15,7 +16,7 @@ export const Products = () => {
   >();
   const [value, setValue] = useState(0);
   useEffect(() => {
-    fetch("http://localhost:1000/products", {
+    fetch(`${DOMAIN}/products`, {
       method: "get",
       headers: {
         Accept: "application/json",

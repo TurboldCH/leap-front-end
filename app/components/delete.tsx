@@ -2,13 +2,14 @@
 
 import { Button, TextField } from "@mui/material";
 import { useState } from "react";
+const DOMAIN = process.env.DOMAIN;
 
 export const Delete = () => {
   const [deleteItem, setDeleteItem] = useState();
   const [category, setCategory] = useState();
   const [deleteID, setDeleteID] = useState<String>();
   const deleteFunction = (event: React.SyntheticEvent) => {
-    fetch("http://localhost:1000/products/" + category + "/" + deleteID, {
+    fetch(`${DOMAIN}/products/${category}/${deleteID}`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",

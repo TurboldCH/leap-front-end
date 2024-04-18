@@ -1,6 +1,7 @@
 "use client";
 import { Button, TextField } from "@mui/material";
 import { ReactNode, useEffect, useState } from "react";
+const DOMAIN = process.env.DOMAIN;
 
 export const CategoryByID = () => {
   const [products, setProducts] = useState<{
@@ -21,7 +22,7 @@ export const CategoryByID = () => {
     if (itemID == undefined || itemID == "") {
       alert("Item ID is missing");
     } else {
-      await fetch("http://localhost:1000/products/" + category + "/" + itemID, {
+      await fetch(`${DOMAIN}/products/${category}/${itemID}`, {
         method: "get",
         headers: {
           Accept: "application/json",

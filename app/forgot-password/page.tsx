@@ -3,7 +3,7 @@
 import { Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-
+const DOMAIN = process.env.DOMAIN;
 export default function ForgotPassword() {
   const [email, setEmail] = useState<String>();
   const router = useRouter();
@@ -13,7 +13,7 @@ export default function ForgotPassword() {
       if (!email) {
         alert("Please enter email");
       } else {
-        await fetch("http://localhost:1000/forgot-password", {
+        await fetch(`${DOMAIN}/forgot-password"`, {
           method: "post",
           headers: {
             Accept: "application/json",
