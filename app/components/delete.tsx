@@ -2,7 +2,7 @@
 
 import { Button, TextField } from "@mui/material";
 import { useState } from "react";
-const DOMAIN = process.env.DOMAIN;
+const DOMAIN = process.env.NEXT_PUBLIC_URL;
 
 export const Delete = () => {
   const [deleteItem, setDeleteItem] = useState();

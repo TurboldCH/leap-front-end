@@ -10,7 +10,7 @@ import { CategoryByID } from "./components/categoryByID";
 import { Post } from "./components/post";
 import { Update } from "./components/update";
 import { useRouter } from "next/navigation";
-const DOMAIN = process.env.DOMAIN;
+const DOMAIN = process.env.NEXT_PUBLIC_URL;
 
 interface TabPanelProps {
   children?: React.ReactNode;

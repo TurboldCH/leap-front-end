@@ -3,7 +3,7 @@
 import { Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-const DOMAIN = process.env.DOMAIN;
+const DOMAIN = process.env.NEXT_PUBLIC_URL;
 export default function Register() {
   const [email, setEmail] = useState<String>();
   const [password, setPassword] = useState<String>();

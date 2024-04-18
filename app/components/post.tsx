@@ -1,7 +1,7 @@
 "use client";
 import { Button, TextField } from "@mui/material";
 import { ReactNode, useEffect, useState } from "react";
-const DOMAIN = process.env.DOMAIN;
+const DOMAIN = process.env.NEXT_PUBLIC_URL;
 
 export const Post = () => {
   const [productName, setProductName] = useState<string>();

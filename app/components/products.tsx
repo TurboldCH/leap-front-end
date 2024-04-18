@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-const DOMAIN = process.env.DOMAIN;
+const DOMAIN = process.env.NEXT_PUBLIC_URL;
 
 export const Products = () => {
   const [products, setProducts] = useState<
