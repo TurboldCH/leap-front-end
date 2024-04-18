@@ -21,7 +21,7 @@ export const Category = () => {
   };
   useEffect(() => {
     fetch(`${DOMAIN}/products/${category}`, {
-      method: "get",
+      method: "GET",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",

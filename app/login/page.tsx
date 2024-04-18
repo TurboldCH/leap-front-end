@@ -19,7 +19,7 @@ export default function Login() {
         alert("Email or passing is missing");
       } else {
         await fetch(`${DOMAIN}/login`, {
-          method: "post",
+          method: "POST",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",

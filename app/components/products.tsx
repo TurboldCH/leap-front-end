@@ -17,7 +17,7 @@ export const Products = () => {
   const [value, setValue] = useState(0);
   useEffect(() => {
     fetch(`${DOMAIN}/products`, {
-      method: "get",
+      method: "GET",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
