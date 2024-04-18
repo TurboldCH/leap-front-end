@@ -10,6 +10,7 @@ import { CategoryByID } from "./components/categoryByID";
 import { Post } from "./components/post";
 import { Update } from "./components/update";
 import { useRouter } from "next/navigation";
+const DOMAIN = process.env.DOMAIN;
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -54,7 +55,7 @@ export default function Home() {
 
   const callProtected = async () => {
     try {
-      const res = await fetch("http://localhost:1000/protected", {
+      const res = await fetch(`${DOMAIN}/protected`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -63,7 +64,7 @@ export default function Home() {
         },
       });
       if (res.status !== 200) {
-        const refresh = await fetch("http://localhost:1000/refresh", {
+        const refresh = await fetch(`${DOMAIN}/refresh`, {
           method: "POST",
           headers: {
             Accept: "application/json",

@@ -4,6 +4,7 @@ import { Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
+const DOMAIN = process.env.DOMAIN;
 export default function Page() {
   const [password, setPassword] = useState<String>();
   const [confirm, setConfirm] = useState<String>();
@@ -18,7 +19,7 @@ export default function Page() {
       if (password !== confirm) {
         alert("Passwords don't match");
       } else {
-        await fetch("http://localhost:1000/reset-password" + `/${id}`, {
+        await fetch(`${DOMAIN}"/reset-password"` + `/${id}`, {
           method: "POST",
           headers: {
             Accept: "application/json",

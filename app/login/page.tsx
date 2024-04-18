@@ -4,6 +4,7 @@ import { Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+const DOMAIN = process.env.DOMAIN;
 export default function Login() {
   const [email, setEmail] = useState<String>();
   const [password, setPassword] = useState<String>();
@@ -17,7 +18,7 @@ export default function Login() {
       if (!email || !password) {
         alert("Email or passing is missing");
       } else {
-        await fetch("http://localhost:1000/login", {
+        await fetch(`${DOMAIN}/login`, {
           method: "post",
           headers: {
             Accept: "application/json",

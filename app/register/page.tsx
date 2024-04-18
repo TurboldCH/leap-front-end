@@ -3,7 +3,7 @@
 import { Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
+const DOMAIN = process.env.DOMAIN;
 export default function Register() {
   const [email, setEmail] = useState<String>();
   const [password, setPassword] = useState<String>();
@@ -17,7 +17,7 @@ export default function Register() {
       if (!email || !password) {
         alert("Email or password is missing");
       } else {
-        await fetch("http://localhost:1000/register", {
+        await fetch(`${DOMAIN}/register`, {
           method: "POST",
           headers: {
             Accept: "application/json",
