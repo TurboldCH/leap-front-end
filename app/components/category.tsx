@@ -1,5 +1,9 @@
 "use client";
 import { ReactNode, useEffect, useState } from "react";
+import LinearProgress from "@mui/material/LinearProgress";
+import { ImageComponent } from "./imageComponent";
+import { ItemData } from "./item";
+
 const DOMAIN = process.env.NEXT_PUBLIC_URL;
 
 export const Category = () => {
@@ -14,12 +18,17 @@ export const Category = () => {
       color: string;
     }[]
   >();
+  const [isLoading, setIsLoading] = useState(false);
   const [category, setCategory] = useState();
   const handleSelectChange = (event: { target: { value: any } }) => {
     setCategory(event.target.value);
     // displayCategory();
   };
   useEffect(() => {
+    setIsLoading(true);
+    if (!category) {
+      return;
+    }
     fetch(`${DOMAIN}/products/${category}`, {
       method: "GET",
       headers: {
@@ -30,6 +39,7 @@ export const Category = () => {
     }).then(async (res) => {
       const data = await res.json();
       setProducts(data);
+      setIsLoading(false);
     });
   }, [category]);
   return (
@@ -55,38 +65,35 @@ export const Category = () => {
           <option value="sports">Sports</option>
         </select>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          gap: "5px",
-          justifyContent: " center",
-        }}
-      >
-        {products &&
-          products.map((product: any, index) => {
-            return (
-              <div
-                key={index}
-                style={{ width: "200px", border: "1px solid", padding: "3px" }}
-              >
-                Product Name: {product.product_name}
-                <br />
-                Brand: {product.brand}
-                <br />
-                Price: ${product.price}
-                <br />
-                Description: {product.description}
-                <br />
-                Release Date: {product.release_date}
-                <br />
-                Size: {product.size} <br />
-                Color: {product.color}
-              </div>
-            );
-          })}
-      </div>
+      {isLoading ? (
+        <LinearProgress />
+      ) : (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "wrap",
+            gap: "5px",
+            justifyContent: " center",
+          }}
+        >
+          {products &&
+            products.map((product: any, index) => {
+              return (
+                <ItemData
+                  id={product._id}
+                  name={product.product_name}
+                  brand={product.brand}
+                  price={product.price}
+                  description={product.description}
+                  release_date={product.release_date}
+                  size={product.size}
+                  color={product.color}
+                />
+              );
+            })}
+        </div>
+      )}
     </>
   );
 };

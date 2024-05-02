@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://fonts.googleapis.com/css?family=Fjalla+One|Montserrat:300,400,700,800|Open+Sans:300");
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -20,7 +22,463 @@ body {
   color: rgb(black);
   background: linear-gradient(rgb(var(--background-end-rgb)))
     rgb(var(--background-start-rgb));
-  background-color: rgb(246, 253, 252);
+  background-color: rgb(144, 204, 195);
+}
+
+.tabs-body {
+}
+.tabs-header {
+  display: table;
+  width: 100%;
+  list-style-type: none;
+}
+.tabs-header li {
+  display: table-cell;
+  text-align: center;
+  color: #ecf0f1;
+  cursor: pointer;
+}
+.tabs-header li > a {
+  display: block;
+  padding: 15px;
+  background: #212f3d;
+  transition: all 0.2s ease-in;
+  transform: skew(-40deg);
+}
+.tabs-header li > a span {
+  display: block;
+  transform: skew(40deg);
+}
+.tabs-header li > a:hover {
+  background: #2471a3;
+  color: #f7f9f9;
+}
+.tabs-header li.active > a {
+  background: #2471a3;
+}
+.tabs-content {
+  margin-top: 15px;
+  position: relative;
+  padding: 20px 25px;
+  overflow: hidden;
+  background: #000;
+}
+.tabs-content .tabs-textItem {
+  display: none;
+  transform: translateY(100%);
+}
+.tabs-content .tabs-textItem.show {
+  display: block;
+  transform: translateY(0);
+  animation: change 0.49s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.tabs-content .tabs-textItem p {
+  font: normal 15px/1.5 "Open Sans";
+  color: #f2f3f4;
+}
+
+/* ----- Global ----- */
+* {
+  box-sizing: border-box;
+}
+
+h3 {
+  font-size: 0.7em;
+  letter-spacing: 1.2px;
+  color: #a6a6a6;
+}
+
+img {
+  max-width: 100%;
+  filter: drop-shadow(1px 1px 3px #a6a6a6);
+}
+
+/* ----- Product Section ----- */
+.product {
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  margin: auto;
+  gap: 20px;
+  width: 600px;
+  padding: 1em 0;
+  background-color: white;
+  border-radius: 5px;
+}
+
+/* ----- Photo Section ----- */
+.product__photo {
+  position: relative;
+}
+
+.photo-container {
+  position: absolute;
+  left: -2.5em;
+  display: grid;
+  grid-template-rows: 1fr;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  box-shadow: 4px 4px 25px -2px rgba(0, 0, 0, 0.3);
+}
+
+.photo-main {
+  border-radius: 6px 6px 0 0;
+  background-color: #9be010;
+  background: radial-gradient(#808473, #2b2c29);
+
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8em;
+    color: #fff;
+
+    i {
+      cursor: pointer;
+    }
+  }
+
+  img {
+    position: absolute;
+    left: -3.5em;
+    top: 2em;
+    max-width: 110%;
+    filter: saturate(150%) contrast(120%) hue-rotate(10deg)
+      drop-shadow(1px 20px 10px rgba(0, 0, 0, 0.3));
+  }
+}
+
+.photo-album {
+  padding: 0.7em 1em;
+  border-radius: 0 0 6px 6px;
+  background-color: #fff;
+
+  ul {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  li {
+    float: left;
+    width: 55px;
+    height: 55px;
+    overflow: auto;
+    padding: 7px;
+    border: 1px solid #a6a6a6;
+    border-radius: 3px;
+  }
+}
+
+/* ----- Informations Section ----- */
+.product__info {
+}
+
+.title {
+  h1 {
+    color: #4c4c4c;
+    font-size: 1.5em;
+    font-weight: 900;
+  }
+  span {
+    font-size: 0.7em;
+    color: #a6a6a6;
+  }
+}
+.price {
+  color: #ff3f40;
+  font-size: 1.2em;
+
+  span {
+    font-size: 2.9em;
+  }
+}
+
+.variant {
+  overflow: auto;
+}
+
+.description {
+  clear: left;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  ul {
+    font-size: 0.8em;
+    list-style: disc;
+    margin-left: 1em;
+  }
+
+  li {
+    text-indent: -0.1em;
+  }
+  .paragraph {
+    height: 80px;
+    width: 250px;
+    overflow: hidden;
+    text-wrap: wrap;
+  }
+}
+
+.buy--btn {
+  padding: 1.5em 3.1em;
+  border: none;
+  border-radius: 7px;
+  font-size: 0.8em;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  color: #fff;
+  background-color: #ff3f40;
+  box-shadow: 2px 2px 25px -7px #4c4c4c;
+  cursor: pointer;
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-to-top.hide {
+  opacity: 0;
+}
+
+.scroll-to-top.show {
+  opacity: 1;
+}
+
+.itemDetail {
+  background-image: linear-gradient(
+    to right bottom,
+    #b91eda,
+    #a02ae0,
+    #8234e5,
+    #5d3be8,
+    #1241eb
+  );
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.itemMain {
+  max-width: 1220px;
+  margin: 5% auto;
+}
+
+.card {
+  box-shadow: 0 6px 6px rgba(#000, 0.3);
+  transition: 200ms;
+  background: #fff;
+
+  .card__title {
+    display: flex;
+    align-items: center;
+    padding: 30px 40px;
+
+    h3 {
+      flex: 0 1 200px;
+      text-align: right;
+      margin: 0;
+      color: #252525;
+      font-family: sans-serif;
+      font-weight: 600;
+      font-size: 20px;
+      text-transform: uppercase;
+    }
+
+    .icon {
+      flex: 1 0 10px;
+      background: #115dd8;
+      color: #fff;
+      padding: 10px 10px;
+      transition: 200ms;
+
+      > a {
+        color: #fff;
+      }
+
+      &:hover {
+        background: #252525;
+      }
+    }
+  }
+
+  .card__body {
+    padding: 0 40px;
+    display: flex;
+    flex-flow: row no-wrap;
+    margin-bottom: 25px;
+
+    > .half {
+      box-sizing: border-box;
+      padding: 0 15px;
+      flex: 1 0 50%;
+    }
+
+    .featured_text {
+      h1 {
+        margin: 0;
+        padding: 0;
+        font-weight: 800;
+        font-family: "Montserrat", sans-serif;
+        font-size: 64px;
+        line-height: 50px;
+        color: #181e28;
+      }
+
+      p {
+        margin: 0;
+        padding: 0;
+
+        &.sub {
+          font-family: "Montserrat", sans-serif;
+          font-size: 26px;
+          text-transform: uppercase;
+          color: #686e77;
+          font-weight: 300;
+          margin-bottom: 5px;
+        }
+
+        &.price {
+          font-family: "Fjalla One", sans-serif;
+          color: #252525;
+          font-size: 26px;
+        }
+      }
+    }
+
+    .image {
+      padding-top: 15px;
+      width: 100%;
+
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+    }
+
+    .description {
+      margin-bottom: 25px;
+
+      p {
+        margin: 0;
+        font-family: "Open Sans", sans-serif;
+        font-weight: 300;
+        line-height: 27px;
+        font-size: 16px;
+        color: #555;
+      }
+    }
+
+    span.stock {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+      color: #a1cc16;
+    }
+
+    .reviews {
+      .stars {
+        display: inline-block;
+        list-style: none;
+        padding: 0;
+
+        > li {
+          display: inline-block;
+
+          .fa {
+            color: #f7c01b;
+          }
+        }
+      }
+
+      > span {
+        font-family: "Open Sans", sans-serif;
+        font-size: 14px;
+        margin-left: 5px;
+        color: #555;
+      }
+    }
+  }
+
+  .card__footer {
+    padding: 30px 40px;
+    display: flex;
+    flex-flow: row no-wrap;
+    align-items: center;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      display: block;
+      top: 0;
+      left: 40px;
+      width: calc(100% - 40px);
+      height: 3px;
+      background: #115dd8;
+      background: linear-gradient(
+        to right,
+        #115dd8 0%,
+        #115dd8 20%,
+        #ddd 20%,
+        #ddd 100%
+      );
+    }
+
+    .recommend {
+      flex: 1 0 10px;
+
+      p {
+        margin: 0;
+        font-family: "Montserrat", sans-serif;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 14px;
+        color: #555;
+      }
+
+      h3 {
+        margin: 0;
+        font-size: 20px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #115dd8;
+      }
+    }
+
+    .action {
+      button {
+        cursor: pointer;
+        border: 1px solid #115dd8;
+        padding: 14px 30px;
+        border-radius: 200px;
+        color: #fff;
+        background: #115dd8;
+        font-family: "Open Sans", sans-serif;
+        font-size: 16px;
+        transition: 200ms;
+
+        &:hover {
+          background: #fff;
+          color: #115dd8;
+        }
+      }
+    }
+  }
 }
 
 @layer utilities {

@@ -14,7 +14,7 @@ export default function ForgotPasswordEmail() {
       if (!email) {
         alert("Please enter email");
       } else {
-        await fetch(`${DOMAIN}/forgot-password-email"`, {
+        await fetch(`${DOMAIN}/forgot-password-email`, {
           method: "POST",
           headers: {
             Accept: "application/json",

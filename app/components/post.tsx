@@ -1,6 +1,7 @@
 "use client";
 import { Button, TextField } from "@mui/material";
 import { ReactNode, useEffect, useState } from "react";
+import { ItemData } from "./item";
 const DOMAIN = process.env.NEXT_PUBLIC_URL;
 
 export const Post = () => {
@@ -14,6 +15,7 @@ export const Post = () => {
   const [size, setSize] = useState<String>();
   const [date, setDate] = useState<string>();
   const [postData, setPostData] = useState<{
+    _id: string;
     product_name: string;
     brand: string;
     price: string;
@@ -163,23 +165,16 @@ export const Post = () => {
         </div>
         {missingFields && <div>Some fields are missing</div>}
         {postData && (
-          <div
-            style={{
-              width: "200px",
-              flexDirection: "column",
-              textAlign: "center",
-            }}
-          >
-            <p>Product Name: {postData?.product_name}</p>
-            <p>Description: {postData?.description}</p>
-            <p>Price: {postData?.price}</p>
-            <p>Quantity: {postData?.quantity_available}</p>
-            <p>Brand: {postData?.brand}</p>
-            <p>Category: {postData?.category}</p>
-            <p>Color: {postData?.color}</p>
-            <p>Size: {postData?.size}</p>
-            <p>Release date: {postData?.release_date}</p>
-          </div>
+          <ItemData
+            id={postData?._id}
+            name={postData?.product_name}
+            brand={postData?.brand}
+            price={postData?.price}
+            description={postData?.description}
+            release_date={postData?.release_date}
+            size={postData?.size}
+            color={postData?.color}
+          />
         )}
       </div>
     </>

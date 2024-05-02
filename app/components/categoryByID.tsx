@@ -1,10 +1,12 @@
 "use client";
 import { Button, TextField } from "@mui/material";
 import { ReactNode, useEffect, useState } from "react";
+import { ItemData } from "./item";
 const DOMAIN = process.env.NEXT_PUBLIC_URL;
 
 export const CategoryByID = () => {
   const [products, setProducts] = useState<{
+    _id: string;
     product_name: string;
     brand: string;
     price: string;
@@ -15,7 +17,7 @@ export const CategoryByID = () => {
   }>();
   const [category, setCategory] = useState();
   const [itemID, setItemID] = useState<String>();
-  const findItem = async (event: React.SyntheticEvent) => {
+  const findItem = async () => {
     if (category == undefined) {
       alert("Select Category");
     }
@@ -80,29 +82,16 @@ export const CategoryByID = () => {
         (typeof products === "string" ? (
           <div>{products}</div>
         ) : (
-          <div
-            style={{
-              width: "200px",
-              flexDirection: "column",
-              textAlign: "center",
-              border: "1px solid",
-            }}
-          >
-            <p>
-              Product Name: {products?.product_name}
-              <br />
-              Brand: {products?.brand}
-              <br />
-              Price: ${products?.price}
-              <br />
-              Description: {products?.description}
-              <br />
-              Release Date: {products?.release_date}
-              <br />
-              Size: {products?.size} <br />
-              Color: {products?.color}
-            </p>
-          </div>
+          <ItemData
+            id={products._id}
+            name={products.product_name}
+            brand={products.brand}
+            price={products.price}
+            description={products.description}
+            release_date={products.release_date}
+            size={products.size}
+            color={products.color}
+          />
         ))}
     </>
   );

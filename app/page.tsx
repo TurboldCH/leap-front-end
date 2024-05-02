@@ -1,5 +1,13 @@
 "use client";
-import { Box, Button, Tab, Tabs, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  Tab,
+  Tabs,
+  TextField,
+  ThemeProvider,
+  createTheme,
+} from "@mui/material";
 import Image from "next/image";
 import { useEffect, useReducer, useState } from "react";
 import Typography from "@mui/material/Typography";
@@ -10,6 +18,10 @@ import { CategoryByID } from "./components/categoryByID";
 import { Post } from "./components/post";
 import { Update } from "./components/update";
 import { useRouter } from "next/navigation";
+import LinearProgress from "@mui/material/LinearProgress";
+import { TabHeader } from "./navigation/tabHeader";
+import { ScrollToTopButton } from "./scrollTop.tsx/ScrollTop";
+
 const DOMAIN = process.env.NEXT_PUBLIC_URL;
 
 interface TabPanelProps {
@@ -45,14 +57,19 @@ const URLS = {
   Post: "/products/createItem",
   Update: "/products/:category/:id",
 };
+
+const defaultTheme = createTheme();
+
 export default function Home() {
   const [value, setValue] = useState(0);
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const router = useRouter();
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [userEmail, setUserEmail] = useState<string>("");
+  const handleChange = (newValue: number) => {
     setValue(newValue);
   };
-
+  [];
   const callProtected = async () => {
     try {
       const res = await fetch(`${DOMAIN}/protected`, {
@@ -77,6 +94,11 @@ export default function Home() {
         } else {
           const refreshToken = await refresh.json();
           localStorage.setItem("token", refreshToken);
+          if (localStorage.getItem("userEmail")) {
+            setUserEmail(localStorage.getItem("userEmail") || "");
+          } else {
+            setUserEmail("");
+          }
           setLoggedIn(true);
         }
       }
@@ -85,87 +107,147 @@ export default function Home() {
     }
   };
   useEffect(() => {
+    setIsLoading(true);
     const token = localStorage.getItem("token");
     if (token === undefined) {
       setLoggedIn(false);
       router.push("/login");
     } else {
       callProtected();
+      setIsLoading(false);
     }
   }, [loggedIn]);
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
-      <div style={{ display: "flex", gap: "15px" }}>
-        <a
-          href="/register"
+    <ThemeProvider theme={defaultTheme}>
+      <main className="flex min-h-screen flex-col items-center p-24">
+        <h1
           style={{
-            textDecoration: "underline",
-            textDecorationColor: "gray",
+            display: "flex",
+            justifyContent: "center",
+            fontWeight: "600",
+            fontSize: "24px",
           }}
         >
-          Register
-        </a>
-        {loggedIn === false ? (
-          <button
-            onClick={() => {
-              setLoggedIn(false);
-              localStorage.removeItem("token");
-              localStorage.removeItem("refreshToken");
-              alert("Logging Out...");
-              router.push("/login");
-            }}
-            style={{
-              textDecoration: "underline",
-              textDecorationColor: "gray",
-            }}
-          >
-            Logout
-          </button>
-        ) : (
+          WELCOME TO MY WEBSITE
+        </h1>
+        <div style={{ display: "flex", gap: "15px", justifyContent: "center" }}>
           <a
-            href="/login"
+            href="homePage"
             style={{
               textDecoration: "underline",
               textDecorationColor: "gray",
             }}
           >
-            Login
+            Home Page
           </a>
-        )}
-      </div>
-      <Box sx={{ width: "100%" }}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="basic tabs example"
-            variant="scrollable"
-            scrollButtons="auto"
+          <a
+            href="/register"
+            style={{
+              textDecoration: "underline",
+              textDecorationColor: "gray",
+            }}
           >
-            {Object.keys(URLS).map((url, index) => {
-              return <Tab label={url} value={index} key={index} />;
-            })}
-          </Tabs>
+            Register
+          </a>
+          {loggedIn === false ? (
+            <div style={{ display: "flex", gap: "15px" }}>
+              <button
+                onClick={() => {
+                  setLoggedIn(false);
+                  localStorage.removeItem("token");
+                  localStorage.removeItem("refreshToken");
+                  localStorage.removeItem("userEmail");
+                  alert("Logging Out...");
+                  router.push("/login");
+                }}
+                style={{
+                  textDecoration: "underline",
+                  textDecorationColor: "gray",
+                }}
+              >
+                Logout
+              </button>
+              <p>Logged in as {localStorage.getItem("userEmail")}</p>
+            </div>
+          ) : (
+            <a
+              href="/login"
+              style={{
+                textDecoration: "underline",
+                textDecorationColor: "gray",
+              }}
+            >
+              Login
+            </a>
+          )}
+        </div>
+        <Box sx={{ width: "100%" }}>
+          <Box
+            sx={{
+              width: "100%",
+              borderBottom: 1,
+              borderColor: "divider",
+              position: "fixed",
+              top: "0",
+              left: "0",
+              zIndex: "100",
+            }}
+          >
+            <div className="tabs">
+              <div className="tabs-body">
+                <TabHeader
+                  data={Object.keys(URLS)}
+                  click={handleChange}
+                  activeId={value}
+                />
+                {/* <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    aria-label="basic tabs example"
+                    variant="scrollable"
+                    scrollButtons="auto"
+                  >
+                    {Object.keys(URLS).map((url, index) => {
+                      return (
+                        <Tab
+                          className="tabs-header"
+                          label={url}
+                          value={index}
+                          key={index}
+                        />
+                      );
+                    })}
+                  </Tabs> */}
+              </div>
+            </div>
+          </Box>
+          {isLoading ? (
+            <LinearProgress />
+          ) : (
+            <div>
+              <CustomTabPanel value={value} index={0}>
+                <Products />
+              </CustomTabPanel>
+              <CustomTabPanel value={value} index={1}>
+                <Category />
+              </CustomTabPanel>
+              <CustomTabPanel value={value} index={2}>
+                <CategoryByID />
+              </CustomTabPanel>
+              <CustomTabPanel value={value} index={3}>
+                <Delete />
+              </CustomTabPanel>
+              <CustomTabPanel value={value} index={4}>
+                <Post />
+              </CustomTabPanel>
+              <CustomTabPanel value={value} index={5}>
+                <Update />
+              </CustomTabPanel>
+            </div>
+          )}
         </Box>
-        <CustomTabPanel value={value} index={0}>
-          <Products />
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={1}>
-          <Category />
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={2}>
-          <CategoryByID />
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={3}>
-          <Delete />
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={4}>
-          <Post />
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={5}>
-          <Update />
-        </CustomTabPanel>
-      </Box>
-    </main>
+        <ScrollToTopButton />
+      </main>
+    </ThemeProvider>
   );
 }
