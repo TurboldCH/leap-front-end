@@ -1,10 +1,16 @@
 "use client";
-import Image from "next/image";
 
 export default function Home() {
+  const categories = [
+    { id: 1, name: "Category 1", description: "Description of Category 1" },
+    { id: 2, name: "Category 2", description: "Description of Category 2" },
+    { id: 3, name: "Category 3", description: "Description of Category 3" },
+    // Add more categories as needed
+  ];
+
   return (
     <div className="flex flex-col full-height color-blue">
-      <header className="py-4 bg-black sm:py-6" x-data="{expanded: false}">
+      <header className="py-4 sm:py-6" x-data="{expanded: false}">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <div className="shrink-0">
@@ -18,13 +24,16 @@ export default function Home() {
             </div>
 
             <nav className="hidden ml-10 mr-auto space-x-10 lg:ml-20 lg:space-x-12 md:flex md:items-center md:justify-start">
-              <a
-                href="/"
-                title=""
-                className="text-base font-normal text-gray-400 transition-all duration-200 hover:text-white"
-              >
-                PRODUCTS
-              </a>
+              <div className="relative hidden md:items-center md:justify-center md:inline-flex group">
+                <div className="absolute transition-all duration-200 rounded-full -inset-px bg-gradient-to-r from-cyan-500 to-purple-500 group-hover:shadow-lg group-hover:shadow-cyan-500/50"></div>
+                <a
+                  href="/"
+                  title=""
+                  className="relative inline-flex items-center justify-center px-6 py-2 text-black border border-transparent rounded-full"
+                >
+                  PRODUCTS
+                </a>
+              </div>
             </nav>
 
             <div className="relative hidden md:items-center md:justify-center md:inline-flex group">
@@ -43,14 +52,14 @@ export default function Home() {
         </div>
       </header>
 
-      <section className="relative py-12 overflow-hidden bg-black sm:pb-16 lg:pb-20 xl:pb-24">
+      <section className="relative py-12 overflow-hidden sm:pb-16 lg:pb-20 xl:pb-24">
         <div className="px-4 mx-auto relativea sm:px-6 lg:px-8 max-w-7xl">
           <div className="grid items-center grid-cols-1 gap-y-12 lg:grid-cols-2 gap-x-16">
             <div>
               <h1 className="text-4xl font-normal text-white sm:text-5xl lg:text-6xl xl:text-7xl">
                 Simple Ecommerce Website
               </h1>
-              <p className="mt-4 text-lg font-normal text-gray-400 sm:mt-8">
+              <p className="mt-4 text-lg font-normal text-black-400 sm:mt-8">
                 Amet minim mollit non deserunt ullamco est sit aliqua dolor do
                 amet sint. Velit officia consequat duis enim velit mollit.
                 Exercitation veniam consequat.
@@ -100,7 +109,7 @@ export default function Home() {
               </form>
 
               <div className="mt-8 sm:mt-12">
-                <p className="text-lg font-normal text-white">
+                <p className="text-lg font-normal text-black">
                   Trusted by 50k+ users
                 </p>
 
@@ -125,6 +134,15 @@ export default function Home() {
               />
             </div>
           </div>
+          <ul>
+            {categories.map((category) => (
+              <li key={category.id}>
+                <h2>{category.name}</h2>
+                <p>{category.description}</p>
+                {/* Add a link/button to view more details about the category */}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
     </div>

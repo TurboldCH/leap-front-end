@@ -256,6 +256,7 @@ img {
 }
 
 .itemDetail {
+  display: flex;
   background-image: linear-gradient(
     to right bottom,
     #b91eda,
@@ -264,10 +265,10 @@ img {
     #5d3be8,
     #1241eb
   );
-  position: absolute;
-  height: 100%;
   width: 100%;
-  margin: 0;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }

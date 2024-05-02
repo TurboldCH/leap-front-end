@@ -81,6 +81,7 @@ export const Category = () => {
             products.map((product: any, index) => {
               return (
                 <ItemData
+                  key={index}
                   id={product._id}
                   name={product.product_name}
                   brand={product.brand}

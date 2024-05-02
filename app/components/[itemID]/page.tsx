@@ -31,7 +31,7 @@ export default function Page({ params }: { params: any }) {
       setProducts(jsonData);
     };
     fetchData();
-  }, []);
+  }, [params.id]);
   return (
     <ItemDetail
       name={products?.product_name}
