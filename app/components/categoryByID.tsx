@@ -18,10 +18,12 @@ export const CategoryByID = () => {
   const [category, setCategory] = useState();
   const [itemID, setItemID] = useState<String>();
   const findItem = async () => {
-    if (category == undefined) {
+    if (category === undefined || category === "") {
+      setProducts(undefined);
       alert("Select Category");
     }
-    if (itemID == undefined || itemID == "") {
+    if (itemID === undefined || itemID === "") {
+      setProducts(undefined);
       alert("Item ID is missing");
     } else {
       await fetch(`${DOMAIN}/products/${category}/${itemID}`, {
@@ -79,8 +81,8 @@ export const CategoryByID = () => {
         </Button>
       </div>
       {products &&
-        (typeof products === "string" ? (
-          <div>{products}</div>
+        (typeof products === "string" || undefined ? (
+          <div>Item doesn't exist</div>
         ) : (
           <ItemData
             id={products._id}

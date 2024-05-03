@@ -8,18 +8,24 @@ export const Delete = () => {
   const [deleteItem, setDeleteItem] = useState();
   const [category, setCategory] = useState();
   const [deleteID, setDeleteID] = useState<String>();
-  const deleteFunction = (event: React.SyntheticEvent) => {
-    fetch(`${DOMAIN}/products/${category}/${deleteID}`, {
-      method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }).then(async (res) => {
-      const data = await res.json();
-      setDeleteItem(data);
-    });
+  const deleteFunction = async (event: React.SyntheticEvent) => {
+    if (category === undefined || category === "") {
+      alert("Select Category");
+    } else if (deleteID === undefined || deleteID === "") {
+      alert("Item ID is missing");
+    } else {
+      fetch(`${DOMAIN}/products/${category}/${deleteID}`, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then(async (res) => {
+        const data = await res.json();
+        setDeleteItem(data);
+      });
+    }
   };
   return (
     <>

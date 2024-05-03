@@ -73,7 +73,7 @@ export const Category = () => {
             display: "flex",
             flexDirection: "row",
             flexWrap: "wrap",
-            gap: "5px",
+            gap: "20px",
             justifyContent: " center",
           }}
         >

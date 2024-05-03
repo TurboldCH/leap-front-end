@@ -53,7 +53,7 @@ const URLS = {
   Products: "/products",
   Category: "/products/Shoes",
   CategoryID: "/products/electronics/10",
-  DeleteCategoryID: "/products/:category/:id",
+  DeleteByID: "/products/:category/:id",
   Post: "/products/createItem",
   Update: "/products/:category/:id",
 };
@@ -116,7 +116,7 @@ export default function Home() {
       callProtected();
       setIsLoading(false);
     }
-  }, [loggedIn]);
+  });
   return (
     <ThemeProvider theme={defaultTheme}>
       <main className="flex min-h-screen flex-col items-center p-24">
@@ -200,24 +200,6 @@ export default function Home() {
                   click={handleChange}
                   activeId={value}
                 />
-                {/* <Tabs
-                    value={value}
-                    onChange={handleChange}
-                    aria-label="basic tabs example"
-                    variant="scrollable"
-                    scrollButtons="auto"
-                  >
-                    {Object.keys(URLS).map((url, index) => {
-                      return (
-                        <Tab
-                          className="tabs-header"
-                          label={url}
-                          value={index}
-                          key={index}
-                        />
-                      );
-                    })}
-                  </Tabs> */}
               </div>
             </div>
           </Box>

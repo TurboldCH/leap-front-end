@@ -10,7 +10,6 @@ export const ImageComponent = (query: any) => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        console.log("IMAGE FETCHING", query.query);
         const response = await fetch(
           `https://pixabay.com/api/?key=${IMAGE_ACCESS_KEY}&q=${query.query}`
         );

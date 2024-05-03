@@ -25,19 +25,26 @@ export const Update = () => {
     quantity_available: string;
     category: string;
   }>();
-  const findItem = async (event: React.SyntheticEvent) => {
-    await fetch(`${DOMAIN}/products/${category}/${itemID}`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    }).then(async (res) => {
-      const data = await res.json();
-      setPostData(data);
-    });
+  const findItem = async () => {
+    if (category === undefined || category === "") {
+      alert("Select Category");
+    } else if (itemID === undefined || itemID === "") {
+      alert("Item ID is missing");
+    } else {
+      await fetch(`${DOMAIN}/products/${category}/${itemID}`, {
+        method: "PUT",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then(async (res) => {
+        const data = await res.json();
+        setPostData(data);
+      });
+    }
   };
-  const updateItem = async (event: React.SyntheticEvent) => {
+  const updateItem = async () => {
     const body: any = {
       product_name: productName,
       description: description,

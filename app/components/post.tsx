@@ -76,7 +76,7 @@ export const Post = () => {
   return (
     <>
       <h1 style={{ fontSize: "36px" }}>Create Item</h1>
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", gap: "100px" }}>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <TextField
             label="Name"
@@ -163,7 +163,7 @@ export const Post = () => {
             Enter
           </Button>
         </div>
-        {missingFields && <div>Some fields are missing</div>}
+        {missingFields && <div>{missingFields}</div>}
         {postData && (
           <ItemData
             id={postData?._id}
