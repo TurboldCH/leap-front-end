@@ -70,42 +70,7 @@ export default function Home() {
     setValue(newValue);
   };
   [];
-  const callProtected = async () => {
-    try {
-      const res = await fetch(`${DOMAIN}/protected`, {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      if (res.status !== 200) {
-        const refresh = await fetch(`${DOMAIN}/refresh`, {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ token: localStorage.getItem("refreshToken") }),
-        });
-        if (refresh.status !== 200) {
-          router.push("/login");
-        } else {
-          const refreshToken = await refresh.json();
-          localStorage.setItem("token", refreshToken);
-          if (localStorage.getItem("userEmail")) {
-            setUserEmail(localStorage.getItem("userEmail") || "");
-          } else {
-            setUserEmail("");
-          }
-          setLoggedIn(true);
-        }
-      }
-    } catch (error) {
-      router.push("/login");
-    }
-  };
+
   useEffect(() => {
     setIsLoading(true);
     const token = localStorage.getItem("token");
@@ -113,10 +78,48 @@ export default function Home() {
       setLoggedIn(false);
       router.push("/login");
     } else {
+      const callProtected = async () => {
+        try {
+          const res = await fetch(`${DOMAIN}/protected`, {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          });
+          if (res.status !== 200) {
+            const refresh = await fetch(`${DOMAIN}/refresh`, {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                token: localStorage.getItem("refreshToken"),
+              }),
+            });
+            if (refresh.status !== 200) {
+              router.push("/login");
+            } else {
+              const refreshToken = await refresh.json();
+              localStorage.setItem("token", refreshToken);
+              if (localStorage.getItem("userEmail")) {
+                setUserEmail(localStorage.getItem("userEmail") || "");
+              } else {
+                setUserEmail("");
+              }
+              setLoggedIn(true);
+            }
+          }
+        } catch (error) {
+          router.push("/login");
+        }
+      };
       callProtected();
       setIsLoading(false);
     }
-  });
+  }, [localStorage.getItem("userEmail")]);
   return (
     <ThemeProvider theme={defaultTheme}>
       <main className="flex min-h-screen flex-col items-center p-24">
