@@ -82,7 +82,7 @@ export const CategoryByID = () => {
       </div>
       {products &&
         (typeof products === "string" || undefined ? (
-          <div>Item doesn't exist</div>
+          <div>Item doesn&#39;t exist</div>
         ) : (
           <ItemData
             id={products._id}
