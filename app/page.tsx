@@ -96,8 +96,6 @@ export default function Home() {
           localStorage.setItem("token", refreshToken);
           if (localStorage.getItem("userEmail")) {
             setUserEmail(localStorage.getItem("userEmail") || "");
-          } else {
-            setUserEmail("");
           }
           setLoggedIn(true);
         }
@@ -167,7 +165,7 @@ export default function Home() {
               >
                 Logout
               </button>
-              <p>Logged in as {localStorage.getItem("userEmail")}</p>
+              <p>Logged in as {userEmail}</p>
             </div>
           ) : (
             <a
