@@ -105,16 +105,18 @@ export default function Home() {
     }
   };
   useEffect(() => {
-    setIsLoading(true);
-    const token = localStorage.getItem("token");
-    if (token === undefined) {
-      setLoggedIn(false);
-      router.push("/login");
-    } else {
-      callProtected();
-      setIsLoading(false);
+    if (typeof window !== "undefined" && window.localStorage) {
+      setIsLoading(true);
+      const token = localStorage.getItem("token");
+      if (token === undefined) {
+        setLoggedIn(false);
+        router.push("/login");
+      } else {
+        callProtected();
+        setIsLoading(false);
+      }
     }
-  }, [localStorage]);
+  }, []);
   return (
     <ThemeProvider theme={defaultTheme}>
       <main className="flex min-h-screen flex-col items-center p-24">
