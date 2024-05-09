@@ -118,7 +118,7 @@ export default function Home() {
         setIsLoading(false);
       }
     }
-  }, []);
+  });
   return (
     <ThemeProvider theme={defaultTheme}>
       <main className="flex min-h-screen flex-col items-center p-24">

@@ -45,6 +45,7 @@ export const ImageComponent = (query: any) => {
     <>
       <img
         src={images}
+        alt="Fetched Image"
         style={{
           objectFit: "cover",
           objectPosition: "center",

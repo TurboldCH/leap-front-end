@@ -154,7 +154,7 @@ export default function Home() {
         <ul className="tilesWrap">
           {allCategories &&
             allCategories.map((category: any) => (
-              <div>
+              <div key={category}>
                 <li
                   id={category}
                   style={{
