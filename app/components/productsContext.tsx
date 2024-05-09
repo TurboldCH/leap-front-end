@@ -5,7 +5,7 @@ import UseLocalStorageState from "../useLocalStorageState/useLocalStorageState";
 
 export const ProductsContext = createContext({
   selectedProducts: [],
-  setSelectedProducts: [],
+  setSelectedProducts: (any: any) => {},
 });
 
 export function ProductsContextProvider({
