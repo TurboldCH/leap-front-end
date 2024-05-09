@@ -32,7 +32,7 @@ export const Update = () => {
       alert("Item ID is missing");
     } else {
       await fetch(`${DOMAIN}/products/${category}/${itemID}`, {
-        method: "PUT",
+        method: "GET",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
