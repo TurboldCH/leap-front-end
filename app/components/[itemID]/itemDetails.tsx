@@ -1,8 +1,11 @@
 "use client";
 
+import React, { useContext } from "react";
 import { ImageComponent } from "../imageComponent";
+import { ProductsContext } from "../productsContext";
 
 export const ItemDetail = ({
+  itemID,
   name,
   brand,
   price,
@@ -11,6 +14,12 @@ export const ItemDetail = ({
   size,
   color,
 }: any) => {
+  const { setSelectedProducts } = useContext(ProductsContext);
+  const contextValue = useContext(ProductsContext);
+  const addProduct = () => {
+    setSelectedProducts((prev: any) => [...prev, itemID]);
+    alert("Item added");
+  };
   return (
     <div className="itemDetail">
       <div className="itemMain">
@@ -71,7 +80,9 @@ export const ItemDetail = ({
               <h3>Pinecone</h3>
             </div>
             <div className="action">
-              <button type="button">Add to cart</button>
+              <button onClick={addProduct} type="button">
+                Add to cart
+              </button>
             </div>
           </div>
         </div>

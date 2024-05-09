@@ -33,11 +33,6 @@ export const Delete = () => {
       <div style={{ display: "flex", paddingBottom: "20px", gap: "10px" }}>
         <select
           id="dropdown"
-          style={{
-            background: "none",
-            border: "1px solid #2196F3",
-            color: "#2196F3",
-          }}
           onChange={(event: { target: { value: any } }) => {
             setCategory(event?.target.value);
           }}

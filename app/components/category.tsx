@@ -48,11 +48,7 @@ export const Category = () => {
         <h1 style={{ fontSize: "36px" }}>Select Category</h1>
         <select
           id="dropdown"
-          style={{
-            background: "none",
-            border: "1px solid #2196F3",
-            color: "#2196F3",
-          }}
+          name="dropdown"
           onChange={handleSelectChange}
           value={category}
         >
@@ -82,7 +78,7 @@ export const Category = () => {
               return (
                 <ItemData
                   key={index}
-                  id={product._id}
+                  itemID={product._id}
                   name={product.product_name}
                   brand={product.brand}
                   price={product.price}

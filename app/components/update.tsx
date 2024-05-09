@@ -95,13 +95,6 @@ export const Update = () => {
         >
           <select
             id="dropdown"
-            style={{
-              background: "none",
-              border: "1px solid #2196F3",
-              color: "#2196F3",
-              height: "48px",
-              width: "210px",
-            }}
             onChange={(event: { target: { value: any } }) => {
               setCategory(event?.target.value);
             }}

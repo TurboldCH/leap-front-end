@@ -40,7 +40,7 @@ export const ImageComponent = (query: any) => {
     if (query.query) {
       fetchImages();
     }
-  }, [query]);
+  }, [query.query]);
   return (
     <>
       <img
@@ -49,7 +49,7 @@ export const ImageComponent = (query: any) => {
           objectFit: "cover",
           objectPosition: "center",
           maxWidth: "100%",
-          maxHeight: "100%",
+          maxHeight: "360px",
           filter:
             "saturate(150%) contrast(120%) hue-rotate(10deg)drop-shadow(1px 20px 10px rgba(0, 0, 0, 0.3))",
         }}

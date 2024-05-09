@@ -115,12 +115,6 @@ export const Post = () => {
           />
           <select
             id="dropdown"
-            style={{
-              background: "none",
-              border: "1px solid #2196F3",
-              color: "#2196F3",
-              height: "48px",
-            }}
             onChange={(event: { target: { value: any } }) => {
               setCategory(event?.target.value);
             }}
@@ -166,7 +160,7 @@ export const Post = () => {
         {missingFields && <div>{missingFields}</div>}
         {postData && (
           <ItemData
-            id={postData?._id}
+            itemID={postData?._id}
             name={postData?.product_name}
             brand={postData?.brand}
             price={postData?.price}

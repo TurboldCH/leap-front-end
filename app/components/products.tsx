@@ -94,7 +94,7 @@ export const Products = () => {
                 return (
                   <ItemData
                     key={index}
-                    id={product._id}
+                    itemID={product._id}
                     name={product.product_name}
                     brand={product.brand}
                     price={product.price}

@@ -21,6 +21,7 @@ import { useRouter } from "next/navigation";
 import LinearProgress from "@mui/material/LinearProgress";
 import { TabHeader } from "./navigation/tabHeader";
 import { ScrollToTopButton } from "./scrollTop.tsx/ScrollTop";
+import { ProductsContextProvider } from "./components/productsContext";
 
 const DOMAIN = process.env.NEXT_PUBLIC_URL;
 
@@ -65,7 +66,7 @@ export default function Home() {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [userEmail, setUserEmail] = useState<string>("");
+  const [userEmail, setUserEmail] = useState<string>();
   const handleChange = (newValue: number) => {
     setValue(newValue);
   };
@@ -89,14 +90,12 @@ export default function Home() {
           },
           body: JSON.stringify({ token: localStorage.getItem("refreshToken") }),
         });
+
         if (refresh.status !== 200) {
           router.push("/login");
         } else {
           const refreshToken = await refresh.json();
           localStorage.setItem("token", refreshToken);
-          if (localStorage.getItem("userEmail")) {
-            setUserEmail(localStorage.getItem("userEmail") || "");
-          }
           setLoggedIn(true);
         }
       }
@@ -112,6 +111,9 @@ export default function Home() {
         setLoggedIn(false);
         router.push("/login");
       } else {
+        if (localStorage.getItem("userEmail")) {
+          setUserEmail(localStorage.getItem("userEmail") || "");
+        }
         callProtected();
         setIsLoading(false);
       }
@@ -157,6 +159,7 @@ export default function Home() {
                   localStorage.removeItem("token");
                   localStorage.removeItem("refreshToken");
                   localStorage.removeItem("userEmail");
+                  localStorage.removeItem("cart");
                   alert("Logging Out...");
                   router.push("/login");
                 }}
@@ -167,7 +170,7 @@ export default function Home() {
               >
                 Logout
               </button>
-              <p>Logged in as {userEmail}</p>
+              {userEmail && <p>Logged in as {userEmail}</p>}
             </div>
           ) : (
             <a

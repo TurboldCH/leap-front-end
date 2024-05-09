@@ -45,11 +45,6 @@ export const CategoryByID = () => {
       <div style={{ display: "flex", paddingBottom: "20px", gap: "10px" }}>
         <select
           id="dropdown"
-          style={{
-            background: "none",
-            border: "1px solid #2196F3",
-            color: "#2196F3",
-          }}
           onChange={(event: { target: { value: any } }) => {
             setCategory(event?.target.value);
           }}
@@ -85,7 +80,7 @@ export const CategoryByID = () => {
           <div>Item doesn&#39;t exist</div>
         ) : (
           <ItemData
-            id={products._id}
+          itemID={products._id}
             name={products.product_name}
             brand={products.brand}
             price={products.price}

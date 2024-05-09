@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export const ItemData = ({
-  id,
+  itemID,
   name,
   brand,
   price,
@@ -30,7 +30,7 @@ export const ItemData = ({
       onMouseOut={handleMouseOut}
       style={{ cursor: "pointer" }}
       onClick={() => {
-        push(`components/${id}`);
+        push(`components/${itemID}`);
       }}
     >
       <section className="product">
