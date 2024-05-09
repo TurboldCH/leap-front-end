@@ -21,7 +21,6 @@ import { useRouter } from "next/navigation";
 import LinearProgress from "@mui/material/LinearProgress";
 import { TabHeader } from "./navigation/tabHeader";
 import { ScrollToTopButton } from "./scrollTop.tsx/ScrollTop";
-import { ProductsContextProvider } from "./components/productsContext";
 
 const DOMAIN = process.env.NEXT_PUBLIC_URL;
 
