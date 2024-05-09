@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useState } from "react";
-import { UseLocalStorageState } from "../useLocalStorageState/page";
+import UseLocalStorageState from "../useLocalStorageState/useLocalStorageState";
 
 export const ProductsContext = createContext({
   selectedProducts: [],
